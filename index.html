@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LK Widget</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./node_modules/leaflet/dist/leaflet.css" />
+  </head>
+  <style>
+    #app {
+      height: 600px;
+    }
+  </style>
+  <body>
+  <div id="app"></div>
+  <script type="text/javascript" src="./node_modules/leaflet/dist/leaflet-src.js"></script>
+  <script type="text/javascript" src="./dist/leaflet-lib-boilerplate.umd.js"></script>
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function() {
+      var map = new L.Map('app');
+
+      var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	    var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+	    var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+
+      // start the map in South-East England
+      map.setView(new L.LatLng(57.70634837921801, 507251.9637680054),9);
+      map.addLayer(osm);
+
+      var marker = new L.MyPlugin({
+        extent: [
+          507251.8944168091,
+          57.606060766826005,
+          507251.99604034424,
+          57.66358555622721
+        ],
+        cellWidth: 1000,
+        units: 'meters'
+      }).addTo(map);
+    }, true)
+  </script>
+  </body>
+</html>
