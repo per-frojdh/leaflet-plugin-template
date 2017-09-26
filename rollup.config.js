@@ -7,7 +7,6 @@ import filesize from 'rollup-plugin-filesize'
 
 const pkg = require('./package.json')
 const leafletModuleName = 'L.MyPlugin'
-const libraryName = 'leaflet-lib'
 
 const plugins = (minify) => {
   const list = [
