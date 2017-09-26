@@ -1,0 +1,1 @@
+## Leaflet Plugin Template
