@@ -6,10 +6,8 @@ import progress from 'rollup-plugin-progress'
 import filesize from 'rollup-plugin-filesize'
 
 const pkg = require('./package.json')
-const { camelCase } = require('lodash')
-
+const leafletModuleName = 'L.MyPlugin'
 const libraryName = 'leaflet-lib'
-// const isProduction = process.env.BUILD && process.env.BUILD === 'production'
 
 const plugins = (minify) => {
   const list = [
@@ -43,38 +41,24 @@ const plugins = (minify) => {
   return list;
 }
 
-
-
-// Custom warning assert, to avoid warnings regarding a warning that rollup
-// will announce due to way TypeScript outputs javascript.
-// Will only disregard a certain type of warning.
-const onWarning = function(warning) {
-  if (warning.code === 'THIS_IS_UNDEFINED') {
-    return
-  }
-  console.error(warning.message)
-}
-
 export default [{
   entry: `src/index.js`,
   dest: pkg.browser,
   format: 'umd',
-  moduleName: 'L.MyPlugin',
+  moduleName: leafletModuleName,
   external: ['leaflet'],
   globals: {
     'leaflet': 'L'
   },
   plugins: plugins(false),
-  onwarn: onWarning
 }, {
   entry: `src/index.js`,
   dest: pkg.minified,
   format: 'umd',
-  moduleName: 'L.MyPlugin',
+  moduleName: leafletModuleName,
   external: ['leaflet'],
   globals: {
     'leaflet': 'L'
   },
   plugins: plugins(true),
-  onwarn: onWarning
 }]
